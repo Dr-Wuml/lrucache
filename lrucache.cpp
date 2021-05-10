@@ -6,31 +6,30 @@ int LruCache::get(int k){
     if(it!=mp.end()){
 	    CacheNode *node = it->second;
 	    remove(node);
-        setHead(node);
-        return node->val;
+            setHead(node);
+            return node->val;
 	} else {
-		return -1;
+	    return -1;
 	}
 }
 
  void LruCache::put(int k,int val){
  	auto it=mp.find(k);
 	if( it != mp.end()){
-    	CacheNode *node = it->second;
-        node->val = val;
-        remove(node);
-        setHead(node);
+    	    CacheNode *node = it->second;
+            node->val = val;
+            remove(node);
+            setHead(node);
 	} else {
 	    CacheNode *newNode =new CacheNode(k,val);
-        if(mp.size() >= size){
-            auto ite = mp.find(tail->key);
-            remove(tail);
-            mp.erase(ite);
-        } else {
+            if(mp.size() >= size){
+                auto ite = mp.find(tail->k);
+                remove(tail);
+                mp.erase(ite);
+            }
             setHead(newNode);
             mp[k] = newNode;
-        }
-    }//!!!end if...else
+        }//!!!end if...else
 }
 
 void LruCache::remove(CacheNode *node){

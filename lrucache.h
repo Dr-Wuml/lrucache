@@ -1,7 +1,7 @@
 #include<iostream>
 #include<map>
 
-//using namespace std;
+using namespace std;
 
 //节点结构
 struct CacheNode{
@@ -9,7 +9,7 @@ struct CacheNode{
     int val;                         //存储内容
     CacheNode *pre,*next;			//当前缓存前后邻居位置
     CacheNode(int k,int v)
-    :key(k),val(v),pre(nullptr),next(nullptr){}
+    :k(k),val(v),pre(nullptr),next(nullptr){}
 };
 
 class LruCache{
@@ -23,10 +23,15 @@ private:
 	CacheNode *head,*tail;		  //头尾指针
 	map<int , CacheNode*>mp;      //利用mp做查找
 public:
-	LRUCache(int capacity){
+	LruCache(int capacity){
         size = capacity;
         head = nullptr;
         tail = nullptr;
-    }
+        }
+	/*void print(){
+	    for(auto &p : mp){
+		cout<<p.first<<" "<<"k="<<p.second->k<<"val="<<p.second->val<<endl;	
+	    }
+	}*/
 };
 
